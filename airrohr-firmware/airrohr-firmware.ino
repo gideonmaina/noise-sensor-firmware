@@ -91,59 +91,10 @@ String SOFTWARE_VERSION(SOFTWARE_VERSION_STR);
 #endif
 
 // includes common to ESP8266 and ESP32 (especially external libraries)
-#include "./oledfont.h" // avoids including the default Arial font, needs to be included before SSD1306.h
-#include <SSD1306.h>
-#include <SH1106.h>
-#include <LiquidCrystal_I2C.h>
-#include <ArduinoJson.h>
-#include <DNSServer.h>
-#include <StreamString.h>
-#include <DallasTemperature.h>
-#include "./dnms_i2c.h"
-#include "./SPH0645.h"
-#include <Adafruit_FONA.h>
+#include "commons.h"
 
-#include <algorithm> // Used for the Noise maximum filter
-
-#if defined(INTL_BG)
-#include "intl_bg.h"
-#elif defined(INTL_CZ)
-#include "intl_cz.h"
-#elif defined(INTL_DE)
-#include "intl_de.h"
-#elif defined(INTL_DK)
-#include "intl_dk.h"
-#elif defined(INTL_EN)
-#include "intl_en.h"
-#elif defined(INTL_ES)
-#include "intl_es.h"
-#elif defined(INTL_FR)
-#include "intl_fr.h"
-#elif defined(INTL_IT)
-#include "intl_it.h"
-#elif defined(INTL_LU)
-#include "intl_lu.h"
-#elif defined(INTL_NL)
-#include "intl_nl.h"
-#elif defined(INTL_PL)
-#include "intl_pl.h"
-#elif defined(INTL_PT)
-#include "intl_pt.h"
-#elif defined(INTL_RS)
-#include "intl_rs.h"
-#elif defined(INTL_RU)
-#include "intl_ru.h"
-#elif defined(INTL_SE)
-#include "intl_se.h"
-#elif defined(INTL_TR)
-#include "intl_tr.h"
-#elif defined(INTL_UA)
-#include "intl_ua.h"
-#else
-#warning No language defined
-#include "intl_en.h"
-#endif
-
+#include <algorithm>			// Used for the Noise maximum filter
+#include "languages/lang_def.h" // include language definitions
 #include "defines.h"
 #include "ext_def.h"
 #include "html-content.h"
