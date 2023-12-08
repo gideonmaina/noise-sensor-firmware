@@ -15,17 +15,17 @@ const char WWW_PASSWORD[] PROGMEM = "feinstaub";
 #define FS_PWD ""
 
 // Where to send the data?
-#define SEND2CFA 1
+#define SEND2CFA 0
 #define SSL_CFA 0
 #define SEND2SENSORCOMMUNITY 0
 #define SSL_SENSORCOMMUNITY 0
-#define SEND2MADAVI 1
+#define SEND2MADAVI 0
 #define SSL_MADAVI 0
 #define SEND2SENSEMAP 0
 #define SEND2FSAPP 0
 #define SEND2AIRCMS 0
 #define SEND2MQTT 0
-#define SEND2INFLUX 0
+#define SEND2INFLUX 1
 #define SEND2LORA 0
 #define SEND2CSV 0
 #define SEND2CUSTOM 0
@@ -33,7 +33,8 @@ const char WWW_PASSWORD[] PROGMEM = "feinstaub";
 // OpenSenseMap
 #define SENSEBOXID ""
 
-enum LoggerEntry {
+enum LoggerEntry
+{
     LoggerCFA,
     LoggerSensorCommunity,
     LoggerMadavi,
@@ -45,13 +46,14 @@ enum LoggerEntry {
     LoggerCount
 };
 
-struct LoggerConfig {
+struct LoggerConfig
+{
     uint16_t destport;
     uint16_t _unused;
 #if defined(ESP8266)
-    BearSSL::Session* session;
+    BearSSL::Session *session;
 #else
-    void* session;
+    void *session;
 #endif
 };
 
@@ -99,12 +101,17 @@ static const char URL_CUSTOM[] PROGMEM = "/data.php";
 #define SSL_CUSTOM 0
 
 // define own InfluxDB
-static const char HOST_INFLUX[] PROGMEM = "ec2-34-250-53-214.eu-west-1.compute.amazonaws.com";
-static const char URL_INFLUX[] PROGMEM = "/write?db=airquality";
+/* This settings can be updated on the web server
+
+*/
+// static const char HOST_INFLUX[] PROGMEM = "ec2-34-250-53-214.eu-west-1.compute.amazonaws.com";
+// static const char URL_INFLUX[] PROGMEM = "/write?db=airquality";
+static const char HOST_INFLUX[] PROGMEM = "192.168.0.100:8086";
+static const char URL_INFLUX[] PROGMEM = "/write?db=sensors"; // ToDo update url with InfluxDB v2 api
 #define PORT_INFLUX 8086
 #define USER_INFLUX ""
 #define PWD_INFLUX ""
-static const char MEASUREMENT_NAME_INFLUX[] PROGMEM = " ";
+static const char MEASUREMENT_NAME_INFLUX[] PROGMEM = "sensordata";
 #define SSL_INFLUX 0
 
 //  pin assignments for NodeMCU V2 board
@@ -124,12 +131,11 @@ static const char MEASUREMENT_NAME_INFLUX[] PROGMEM = " ";
 #define FONA_TX 0
 #define FONA_RST 4
 
-//define I2S pins for the SPH0645 MIC
-#define I2SI_DATA         12    // I2S data on GPIO12
-#define I2SI_BCK          13    // I2S clk on GPIO13
-#define I2SI_WS           14    // I2S select on GPIO14
+// define I2S pins for the SPH0645 MIC
+#define I2SI_DATA 12 // I2S data on GPIO12
+#define I2SI_BCK 13  // I2S clk on GPIO13
+#define I2SI_WS 14   // I2S select on GPIO14
 #endif
-
 
 // pin assignments for Arduino SAMD Zero board
 #if defined(ARDUINO_SAMD_ZERO)
@@ -145,10 +151,9 @@ static const char MEASUREMENT_NAME_INFLUX[] PROGMEM = " ";
 #if defined(ARDUINO_LOLIN_D32_PRO)
 #define ONEWIRE_PIN D32
 #endif
-//#define RFM69_CS D0
-//#define RFM69_RST D2
-//#define RFM69_INT D4
-
+// #define RFM69_CS D0
+// #define RFM69_RST D2
+// #define RFM69_INT D4
 
 // pin assignments for heltec_wifi_lora_32_V2 board
 #if defined(WIFI_LoRa_32_V2)
@@ -171,8 +176,8 @@ static const char MEASUREMENT_NAME_INFLUX[] PROGMEM = " ";
 // Device is WiFi Enabled
 #define WIFI_ENABLED 0
 
-//SPH0645 MEMS Microphone
-#define SPHO645_READ  1
+// SPH0645 MEMS Microphone
+#define SPHO645_READ 1
 #define SPH0645_API_PIN 15
 
 // GSM
