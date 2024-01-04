@@ -1,4 +1,7 @@
+# To be updated
+
 # Software for hardware prototypes
+Below resources are forked from original [Airrohr Repo](https://github.com/CodeForAfrica/sensors.AFRICA-Noise-sensors-software)
 
 ## esp8266-arduino
 
